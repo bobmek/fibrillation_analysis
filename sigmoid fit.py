@@ -11,7 +11,6 @@ import pylab
 from scipy.optimize import curve_fit
 import string
 
-
 def sigmoid(x, x0, k, a, c):
      y =c+(a / (1 + np.exp(-k*(x-x0))))
      return y
@@ -28,8 +27,6 @@ numsamples=len(TRawData)
 samples=TRawData[1:numsamples]
 popt=np.zeros((numsamples-1, 4))
 p0=([0,0,0,0])
-
-
 
 
 for m in range(0, numsamples-1):
