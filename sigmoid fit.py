@@ -15,12 +15,12 @@ def sigmoid(x, x0, k, a, c):
      y =c+(a / (1 + np.exp(-k*(x-x0))))
      return y
 
-wb1 = openpyxl.load_workbook('datasample.xlsx')
+wb1 = openpyxl.load_workbook('rawdata.xlsx')
 s1=wb1.get_sheet_by_name('Sheet1')
 s2=wb1.get_sheet_by_name('Sheet2')
 writesheet=s2
 
-RawData=np.array([[cell.value for cell in col] for col in s1['AM69':'AU107']])
+RawData=np.array([[cell.value for cell in col] for col in s1['A2':'O86']])
 TRawData=np.transpose(RawData)
 time=TRawData[0]
 numsamples=len(TRawData)
@@ -35,7 +35,7 @@ for m in range(0, numsamples-1):
     pcov=np.zeros((4, 4))
 
 
-    popt[m], pcov = curve_fit(sigmoid, time, ydata, p0)
+    popt[m], pcov = curve_fit(sigmoid, time[0:35], ydata[0:35], p0)
     x = np.linspace(1,46000,50)
     y = sigmoid(x, *popt[m])
 
