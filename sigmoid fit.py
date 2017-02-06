@@ -20,7 +20,7 @@ s1=wb1.get_sheet_by_name('Sheet1')
 s2=wb1.get_sheet_by_name('Sheet2')
 writesheet=s2
 
-RawData=np.array([[cell.value for cell in col] for col in s1['A2':'O86']])
+RawData=np.array([[cell.value for cell in col] for col in s1['S3':'X573']])
 TRawData=np.transpose(RawData)
 time=TRawData[0]
 numsamples=len(TRawData)
@@ -35,13 +35,13 @@ for m in range(0, numsamples-1):
     pcov=np.zeros((4, 4))
 
 
-    popt[m], pcov = curve_fit(sigmoid, time[0:35], ydata[0:35], p0)
-    x = np.linspace(1,46000,50)
+    popt[m], pcov = curve_fit(sigmoid, time, ydata, p0)
+    x = np.linspace(1,500000,50)
     y = sigmoid(x, *popt[m])
 
     pylab.plot(time, ydata, 'o', label='data')
     pylab.plot(x,y, label='fit')
-    pylab.ylim(0, 3500)
+    pylab.ylim(0, 10000)
     pylab.legend(loc='best')
     pylab.show()
 
