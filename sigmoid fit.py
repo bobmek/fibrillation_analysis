@@ -20,7 +20,7 @@ s1=wb1.get_sheet_by_name('Sheet1')
 s2=wb1.get_sheet_by_name('Sheet2')
 writesheet=s2
 
-RawData=np.array([[cell.value for cell in col] for col in s1['AS2':'AW179']])
+RawData=np.array([[cell.value for cell in col] for col in s1['AY2':'BC461']])
 TRawData=np.transpose(RawData)
 time=TRawData[0]
 numsamples=len(TRawData)
