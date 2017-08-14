@@ -36,7 +36,7 @@ for m in range(0, numsamples-1):
 
 
     popt[m], pcov = curve_fit(sigmoid, time, ydata, p0)
-    x = np.linspace(1,200000,50)
+    x = np.linspace(1,400000,50)
     y = sigmoid(x, *popt[m])
 
     pylab.plot(time, ydata, 'o', label='data')
