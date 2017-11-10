@@ -24,7 +24,8 @@ writesheet=s2
 
 
 #Actually reading the data in the spreadsheet and transposing it 
-RawData=np.array([[cell.value for cell in col] for col in s1['AY2':'BC461']])
+RawData=np.array([[cell.value for cell in col] for col in s1['A3':'M575']])
+Analogs=np.array([[cell.value for cell in col] for col in s1['B2':'M2']])
 TRawData=np.transpose(RawData)
 time=TRawData[0]
 numsamples=len(TRawData)
@@ -41,13 +42,20 @@ for m in range(0, numsamples-1):
 
 
     popt[m], pcov = curve_fit(sigmoid, time, ydata, p0)
-    x = np.linspace(1,400000,50)
+    x = np.linspace(1,400000,2000)
     y = sigmoid(x, *popt[m])
 
-    pylab.plot(time, ydata, 'o', label='data')
-    pylab.plot(x,y, label='fit')
+    pylab.plot(time, ydata, '+', label='Raw Data')
+    pylab.plot(x,y, label='Sigmoid Fit')
+    pylab.plot(popt[m,0], popt[m,2]/2, 'o', label='EC50')
     #pylab.ylim(0, 25000)
     pylab.legend(loc='best')
+    pylab.title(Analogs[0,m])
+    count=str(m)
+    savefig = Analogs[0,m] + '.png'
+    
+    pylab.savefig(savefig)
+    
     pylab.show()
 
 
